@@ -61,12 +61,12 @@ class AlexNet(object):
         conv1 = conv(self.X, 11, 11, 96, 4, 4, padding='VALID', name='conv1')
         norm1 = lrn(conv1, 2, 2e-05, 0.75, name='norm1')
         pool1 = max_pool(norm1, 3, 3, 2, 2, padding='VALID', name='pool1')
-        
+
         # 2nd Layer: Conv (w ReLu)  -> Lrn -> Pool with 2 groups
         conv2 = conv(pool1, 5, 5, 256, 1, 1, groups=2, name='conv2')
         norm2 = lrn(conv2, 2, 2e-05, 0.75, name='norm2')
         pool2 = max_pool(norm2, 3, 3, 2, 2, padding='VALID', name='pool2')
-        
+
         # 3rd Layer: Conv (w ReLu)
         conv3 = conv(pool2, 3, 3, 384, 1, 1, name='conv3')
 
@@ -84,10 +84,11 @@ class AlexNet(object):
 
         # 7th Layer: FC (w ReLu) -> Dropout
         fc7 = fc(dropout6, 4096, 4096, name='fc7')
-        dropout7 = dropout(fc7, self.KEEP_PROB)
-
-        # 8th Layer: FC and return unscaled activations
-        self.fc8 = fc(dropout7, 4096, self.NUM_CLASSES, relu=False, name='fc8')
+        print(fc7)
+        # dropout7 = dropout(fc7, self.KEEP_PROB)
+        #
+        # # 8th Layer: FC and return unscaled activations
+        # self.fc8 = fc(dropout7, 4096, self.NUM_CLASSES, relu=False, name='fc8')
 
     def load_initial_weights(self, session):
         """Load weights from file into network.
