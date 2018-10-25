@@ -1,2 +1,5 @@
 *.npy
 **/*.pyc
+.DS_Store
+all/
+alexenv/

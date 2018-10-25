@@ -20,18 +20,19 @@ import tensorflow as tf
 from alexnet import AlexNet
 from datagenerator import ImageDataGenerator
 from datetime import datetime
-from tensorflow.contrib.data import Iterator
+# from tensorflow.contrib.data import Iterator
+Iterator = tf.data.Iterator
 
 """
 Configuration Part.
 """
 
 # Path to the textfiles for the trainings and validation set
-train_file = '/path/to/train.txt'
-val_file = '/path/to/val.txt'
+train_file = '/Users/Ruta/Developer/STAC/finetune_alexnet_with_tensorflow/train.txt'
+val_file = '/Users/Ruta/Developer/STAC/finetune_alexnet_with_tensorflow/val.txt'
 
 # Learning params
-learning_rate = 0.01
+learning_rate = 0.001 #0.01
 num_epochs = 10
 batch_size = 128
 
@@ -112,6 +113,8 @@ for gradient, var in gradients:
 
 # Add the variables we train to the summary
 for var in var_list:
+    print("Var is = " + str(var.name))
+    print("Init value = " + str(var.initial_value))
     tf.summary.histogram(var.name, var)
 
 # Add the loss to summary
